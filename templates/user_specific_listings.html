@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<h2 class="text-2xl text-gray-600">You can see the estates you added here and manage them</h2>
+<div>
+    {% if listings %}
+    {% for listing in listings %}
+        
+        <div class="mt-2 px-3 py-2 bg-gray-100 rounded-sm">
+            <h3 class="text-3xl text-gray-900">{{ listing.Title }}</h3>
+            {% if listing.Image %}
+            <img src="{{ listing.Image.url }}" alt="">
+            {% endif %}
+            <a href="/listings/{{ listing.id }}/" class="text-blue-500">
+                View Details</a>
+        </div>
+        <div>
+            {% if request.user.is_authenticated %}
+            <div class="mt-2 py-2 border-t border-gray-200">
+                <a href="/listings/{{ listing.id }}/edit/" class="text-blue-500">
+                    Edit</a>
+                <a href="/listings/{{ listing.id }}/delete/" class="ml-3 text-blue-500">
+                    Delete</a>
+            </div>
+        {% endif %}
+        </div>
+
+    {% endfor %}
+    {% else %}
+    <div class="col-md-12">
+    <p>No Listings Available</p>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}
