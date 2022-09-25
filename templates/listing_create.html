@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- <style>
+body{
+background-image: url('C:\Users\Dell\Desktop\RE\real_estate\media\home-5.jpg');
+};
+</style> -->
+
+<center><h1 class="text-4xl text-gray-900">Create a New Listing</h1></center>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <center><button type="submit" class="flex items-center px-4 py-3 text-white bg-blue-500 hover:bg-blue-400">Submit</button></center>
+    <!-- <center><button type="submit"  class="btn btn-success" style="color: #2ecc71">Submit</button></center> -->
+</form>
+
+{% endblock %}

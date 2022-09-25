@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+<center><h1 class="text-4xl text-gray-900">Search estate of your choice</h1></center><br>
+<div>
+    <form class="form-inline" action="{% url 'listing_search' %}" method="get" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-check form-check-inline">
+            <div class="col-md-18 mb-3">
+                <label class="sr-only">Title</label>
+                <input type="text" name="Title" class="form-control" placeholder="Title/Keywords"  value="{{ Title}}">
+            </div>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <div class="col-md-18 mb-3">
+                <label class="sr-only">City</label>
+                <input type="text" name="City" class="form-control" placeholder="City"  value="{{ City}}">
+            </div>
+        </div>
+            
+        <div class="form-check form-check-inline">
+            <div class="col-md-18 mb-3">
+                <label class="sr-only">Face</label>
+                <input type="text" name="Face" class="form-control" placeholder="Face"  value="{{ Face}}">
+            </div>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <div class="col-md-18 mb-3">
+                <label class="sr-only">Price</label>
+                <input type="text" name="Price" class="form-control" placeholder="Max. Price"  value="{{ Price}}">
+            </div>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <div class="col-md-18 mb-3">
+                <label class="sr-only">Area</label>
+                <input type="text" name="Area" class="form-control" placeholder="Max. Area"  value="{{ Area}}">
+            </div>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <div class="col-md-18 mb-3">
+                <label class="sr-only">Bedroom</label>
+                <input type="text" name="Bedroom" class="form-control" placeholder="Min. Bedrooms"  value="{{ Bedroom}}">
+            </div>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <div class="col-md-18 mb-3">
+                <label class="sr-only">Bathroom</label>
+                <input type="text" name="Bathroom" class="form-control" placeholder="Min. Bathroom"  value="{{ Bathroom}}">
+            </div>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <div class="col-md-18 mb-3">
+                <label class="sr-only">Floors</label>
+                <input type="text" name="Floors" class="form-control" placeholder="Min. Floors"  value="{{ Floors}}">
+            </div>
+        </div>
+
+        <center><button class="flex items-center px-4 py-3 text-white bg-blue-500 hover:bg-blue-400" type="submit">Submit form</button></center>
+        <br>
+    </form>
+</div>
+</div>
+
+<div class = "container">
+    {% if listings %}
+    {% for listing in listings %}
+    
+    <div class="mt-2 px-3 py-2 bg-gray-100 rounded-sm">
+        <h3 class="text-3xl text-gray-900">{{ listing.Title }}</h3>
+        {% if listing.Image %}
+        <img src="{{ listing.Image.url }}" alt="">
+        {% endif %}
+        <center><a class="button" href="/listings/{{ listing.id }}/" class="text-blue-500">
+            View Details</a></center>
+    </div>
+
+    {% endfor %}
+    {% else %}
+    <div class="col-md-12">
+    <p>No Listings Available</p>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock content %}
